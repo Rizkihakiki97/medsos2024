@@ -17,6 +17,8 @@ if (isset($_POST['daftar'])) {
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,12 +37,9 @@ if (isset($_POST['daftar'])) {
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h5>Selamat Datang di Akun "GUE"</h5>
-                                <p>Silahkan masuk dengan akun anda</p>
+                                <h5>Medsos X - Rizky Hakiki</h5>
+                                <!-- <p>Silahkan masuk dengan akun anda</p> -->
                             </div>
-                            <?php if (isset($_GET['regiter'])): ?>
-                                <div class="alert alert-success">Registrasi pengguna berhasil</div>
-                            <?php endif; ?>
                             <form action="" method="post">
                                 <div class="form-group mb-3">
                                     <label for="" class="form-label">
@@ -57,8 +56,22 @@ if (isset($_POST['daftar'])) {
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;">
                                 </div>
                                 <div class="form-group mb-3">
+                                    <label for="" class="form-label">
+                                        Nama Lengkap
+                                    </label>
+                                    <input type="text" class="form-control" name="nama_lengkap"
+                                        placeholder="Masukkan Nama Lengkap anda">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="" class="form-label">
+                                        Nama Pengguna
+                                    </label>
+                                    <input type="text" class="form-control" name="nama-pengguna"
+                                        placeholder="Masukkan Nama Pengguna anda">
+                                </div>
+                                <div class="form-group mb-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary" name="login">Masuk</button>
+                                        <button type="submit" class="btn btn-primary" name="daftar">Daftar</button>
                                     </div>
                                 </div>
                             </form>
@@ -66,7 +79,7 @@ if (isset($_POST['daftar'])) {
                     </div>
                     <div class="card mt-3">
                         <div class="card-body">
-                            <p>Sudah Punya Akun?</p><a href="register.php" class="text-secondary">Buat Akun</a>
+                            <p>Sudah Punya Akun?</p><a href="" class="text-secondary">Buat Akun</a>
                         </div>
                     </div>
                 </div>
