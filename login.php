@@ -1,22 +1,3 @@
-<?php
-
-include 'koneksi.php';
-// jika button daftar di klik atau di tekan
-if (isset($_POST['daftar'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $nama_lengkap = $_POST['nama_lengkap'];
-    $nama_pengguna = $_POST['nama_pengguna'];
-
-    // masukkan data ke dalam tbl user kolom kolom tbl user () dan nilainya di ambil dari inputan sesuai dengan urutan kolomnya
-    mysqli_query($koneksi, "INSERT INTO user (email, password, nama_lengkap, nama_pengguna) VALUE ('$email','$password','$nama_lengkap','$nama_pengguna')");
-
-    // melempar ke halaman login
-    header("location:login.php?register=berhasil");
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +12,7 @@ if (isset($_POST['daftar'])) {
     <div class="wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3 mx-auto mt-5">
+                <div class="col-sm-4 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
@@ -41,7 +22,7 @@ if (isset($_POST['daftar'])) {
                             <?php if (isset($_GET['regiter'])): ?>
                                 <div class="alert alert-success">Registrasi pengguna berhasil</div>
                             <?php endif; ?>
-                            <form action="" method="post">
+                            <form action="actionLogin.php" method="post">
                                 <div class="form-group mb-3">
                                     <label for="" class="form-label">
                                         Email

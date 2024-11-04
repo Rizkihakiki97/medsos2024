@@ -3,7 +3,8 @@ session_start();
 include 'koneksi.php';
 
 $email = $_POST['email'];
-$password = sha1($_POST['password']);
+// $password = sha1($_POST['password']);
+$password = $_POST['password'];
 
 $queryLogin = mysqli_query(
     $koneksi,
@@ -11,10 +12,9 @@ $queryLogin = mysqli_query(
 );
 if (mysqli_num_rows($queryLogin)  > 0) {
     $rowUser = mysqli_fetch_assoc($queryLogin);
-    // print_r($rowUser);
-    // die;
+
     if ($rowUser['password'] == $password) {
-        $_SESSION['NAMA'] = $rowUser['name'];
+        $_SESSION['NAMA'] = $rowUser['nama_pengguna'];
         $_SESSION['ID'] = $rowUser['id'];
         header("location:index.php?login=berhasil");
     } else {

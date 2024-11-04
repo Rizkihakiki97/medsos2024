@@ -33,7 +33,7 @@ if (isset($_POST['daftar'])) {
     <div class="wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3 mx-auto mt-5">
+                <div class="col-sm-4 mx-auto mt-5">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">

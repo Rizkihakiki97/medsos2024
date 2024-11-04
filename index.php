@@ -1,4 +1,6 @@
 <?php
+ob_start();
+ob_clean();
 session_start();
 // empty() : kosong
 if (empty($_SESSION['NAMA'])) {
@@ -17,6 +19,19 @@ include 'function/helper.php';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perpus</title>
   <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+
+  <style>
+    .cover {
+      height: 200px;
+    }
+
+    .cover img {
+      background-size: cover;
+      background-position: center;
+
+    }
+  </style>
 </head>
 
 <body>
@@ -41,9 +56,29 @@ include 'function/helper.php';
   </div>
   <script src="assets/js/jquery-3.7.1.min.js"></script>
   <script src="assets/js/moment.js"></script>
-  <!-- <script src="assets/dist/js/bootstrap.min.js"></script> -->
+  <script src="assets/dist/js/bootstrap.min.js"></script>
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Summernote -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+
   <script src="app.js"></script>
+
+  <script>
+    $('#summernote').summernote({
+      placeholder: 'Hello stand alone ui',
+      tabsize: 2,
+      height: 120,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+  </script>
 
   <script>
     $("#id_peminjaman").change(function() {
