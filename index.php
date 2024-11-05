@@ -3,9 +3,9 @@ ob_start();
 ob_clean();
 session_start();
 // empty() : kosong
-if (empty($_SESSION['NAMA'])) {
-  header("location:login.php?access=failed");
-}
+// if (empty($_SESSION['NAMA'])) {
+//   header("location:login.php?access=failed");
+// }
 
 
 include 'koneksi.php';

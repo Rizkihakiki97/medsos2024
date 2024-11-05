@@ -5,8 +5,10 @@ $queryUser = mysqli_query($koneksi, "SELECT * FROM user WHERE id ='$id_user'");
 $rowUser = mysqli_fetch_assoc($queryUser);
 
 $queryTweet = mysqli_query($koneksi, "SELECT * FROM tweet WHERE id ='$id_user'");
-$rowTweet = mysqli_fetch_assoc($queryTweet);
+$rowTweets = mysqli_fetch_assoc($queryTweet);
 
+$queryProfile = mysqli_query($koneksi, "SELECT * FROM user WHERE id ='$id_user'");
+$rowProfile = mysqli_fetch_assoc($queryProfile);
 
 if (isset($_POST['simpan'])) {
     $nama_lengkap   = $_POST['nama_lengkap'];
@@ -33,11 +35,12 @@ if (isset($_POST['simpan'])) {
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);  //memindahkan foto ke folder upload
 
             $update = mysqli_query($koneksi, "UPDATE user SET nama_lengkap='$nama_lengkap', nama_pengguna='$nama_pengguna', foto='$nama_foto', email='$email' WHERE id = '$id_user'");
+            header("location: ?pg=profil&ubah=berhasil");
         }
     } else {
         $update = mysqli_query($koneksi, "UPDATE user SET nama_lengkap ='$nama_lengkap', nama_pengguna ='$nama_pengguna', email='$email' WHERE id='$id_user'");
+        // header("location: ?pg=profil&ubah=berhasil");
     }
-    header("location:?pg=profil&ubah=berhasil");
 }
 
 if (isset($_POST['edit_cover'])) {
@@ -60,9 +63,9 @@ if (isset($_POST['edit_cover'])) {
             move_uploaded_file($_FILES['cover']['tmp_name'], 'upload/' . $nama_cover);  //memindahkan cover ke folder upload
 
             $update = mysqli_query($koneksi, "UPDATE user SET  cover='$nama_cover' WHERE id = '$id_user'");
+            header("location:?pg=profil&ubah=berhasil");
         }
     }
-    header("location:?pg=profil&ubah=berhasil");
 }
 
 
@@ -78,10 +81,10 @@ if (isset($_POST['edit_cover'])) {
         <div class="col-sm-6">
             <div class="profile-header mt-5">
                 <img width="100"
-                    src="<?php echo !empty($rowUser['foto']) ? 'upload/' . $rowUser['foto'] : 'https://placehold.co/100' ?>"
+                    src="<?php echo !empty($rowProfile['foto']) ? 'upload/' . $rowProfile['foto'] : 'https://placehold.co/100' ?>"
                     alt="" class="ms-3 mt-5 rounded-circle border border-2 border-dark">
-                <h2><?php echo $rowUser['nama_lengkap'] ?></h2>
-                <p>@<?php echo $rowUser['nama_pengguna'] ?></p>
+                <h2><?php echo $rowProfile['nama_lengkap'] ?></h2>
+                <p>@<?php echo $rowProfile['nama_pengguna'] ?></p>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
                     and scrambled it to make a type specimen book. It has survived not only five centuries, but also the

@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary" name="login">Masuk</button>
+                                        <button type="submit" class="btn btn-primary">Masuk</button>
                                     </div>
                                 </div>
                             </form>

@@ -1,16 +1,15 @@
 <?php
+// $queryPosting = mysqli_query($koneksi, "SELECT * FROM tweet WHERE id_user ='$id_user'");
 if (isset($_POST['simpan'])) {
-    $nama_lengkap   = $_POST['nama_lengkap'];
-    $nama_pengguna  = $_POST['nama_pengguna'];
-    $email          = $_POST['email'];
-
-
+    // print_r($_POST);
+    // die;
+    $kontent = $_POST['content'];
 
     if (!empty($_FILES['foto']['name'])) {
         $nama_foto = $_FILES['foto']['name'];
 
-        // $ext = array('png', 'jpg', 'jpeg');
-        // $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
+        $ext = array('png', 'jpg', 'jpeg');
+        $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
 
         //Jika extensi logo tidak memenuhi syarat array extensi
         // if (!in_array($extFoto, $ext)) {
@@ -20,16 +19,15 @@ if (isset($_POST['simpan'])) {
 
         // pindahkan  gambar dari tmp folder ke folder yang sudah kita buat
         // unlink() : mendelete file
-        unlink('upload/' . $rowUser['foto']);
+        unlink('upload/' . $rowTweet['foto']);
         move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' . $nama_foto);  //memindahkan foto ke folder upload
 
-        $insert = mysqli_query($koneksi, "INSERT INTO tweet (content, id_user) VALUES ('$content','$id_user','$nama_foto)'");
+        $insert = mysqli_query($koneksi, "INSERT INTO tweet (content, id_user, foto) VALUES ('$kontent','$id_user','$nama_foto)'");
+    } else {
+        $insert = mysqli_query($koneksi, "INSERT INTO tweet (content, id_user) VALUES ('$kontent','$id_user')");
+        header("location:?pg=profil&ubah=berhasil");
     }
-} else {
-    $insert = mysqli_query($koneksi, "INSERT INTO tweet (content, id_user) VALUES ('$content','$id_user')");
-    header("location:?pg=profil&ubah=berhasil");
 }
-$queryPosting = mysqli_query($koneksi, "SELECT * FROM tweet WHERE id_user ='$id_user'");
 ?>
 
 <div class="row">
@@ -39,20 +37,21 @@ $queryPosting = mysqli_query($koneksi, "SELECT * FROM tweet WHERE id_user ='$id_
     </div>
 
     <div class=" col-sm-12 mt-3">
-        <?php while ($rowTweet = mysqli_fetch_assoc($queryPosting)) : ?>
+        <?php while ($rowTweet = mysqli_fetch_assoc($queryTweet)) : ?>
             <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img src="upload/<?php echo !empty($rowUser['foto']) ? $rowUser['foto'] : '' ?>" alt="" width="100">
+                    <img src="upload/<?php echo !empty($rowProfile['foto']) ? $rowProfile['foto'] : '' ?>" alt=""
+                        width="100">
                 </div>
                 <div class="flex-grow-1 ms-3">
-                    <?php if (!empty($rowPosting['foto'])): ?>
-                        <img src="upload/<?php echo !empty($rowUser['foto']) ? $rowUser['foto'] : '' ?>" alt="" width="100%">
+                    <?php if (!empty($rowUser['foto'])): ?>
+                        <img src="upload/<?php echo !empty($rowTweet['foto']) ? $rowTweet['foto'] : '' ?>" alt="" width="100%">
                     <?php endif ?>
-                    <?php echo $rowPosting['content'] ?>
+                    <?php echo $rowTweet['content'] ?>
                 </div>
             </div>
+            <hr>
         <?php endwhile ?>
-        <hr>
     </div>
 </div>
 
@@ -60,7 +59,7 @@ $queryPosting = mysqli_query($koneksi, "SELECT * FROM tweet WHERE id_user ='$id_
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profil</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tweet</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="" method="post" enctype="multipart/form-data">
